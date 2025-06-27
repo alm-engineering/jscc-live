@@ -3,14 +3,15 @@
 import React from 'react'
 import { SessionData } from '@/types/schedule'
 import { cn } from '@/lib/utils'
-import { Clock, MapPin } from 'lucide-react'
 
 type SessionProps = {
   session: SessionData
   onClick?: () => void
+  isPast?: boolean
+  isCurrent?: boolean
 }
 
-const Session: React.FC<SessionProps> = ({ session, onClick }) => {
+const Session: React.FC<SessionProps> = ({ session, onClick, isPast, isCurrent }) => {
   if (session.isLunch) {
     return null // Lunch is handled differently in the grid
   }
@@ -19,8 +20,15 @@ const Session: React.FC<SessionProps> = ({ session, onClick }) => {
   const rotations = ['-rotate-1', 'rotate-1', '-rotate-2', 'rotate-2', 'rotate-0']
   const randomRotation = rotations[parseInt(session.id) % rotations.length]
   
-  // Generate random colors for sticky notes
-  const colors = [
+  // Generate random colors for sticky notes - gray if past
+  const colors = isPast ? [
+    'bg-gray-200 hover:bg-gray-300',
+    'bg-gray-200 hover:bg-gray-300',
+    'bg-gray-200 hover:bg-gray-300',
+    'bg-gray-200 hover:bg-gray-300',
+    'bg-gray-200 hover:bg-gray-300',
+    'bg-gray-200 hover:bg-gray-300',
+  ] : [
     'bg-yellow-200 hover:bg-yellow-300',
     'bg-pink-200 hover:bg-pink-300',
     'bg-blue-200 hover:bg-blue-300',
@@ -48,41 +56,30 @@ const Session: React.FC<SessionProps> = ({ session, onClick }) => {
         "before:w-0 before:h-0",
         "before:border-t-[20px] before:border-t-white/50",
         "before:border-r-[20px] before:border-r-transparent",
-        "before:shadow-inner"
+        "before:shadow-inner",
+        isPast && "opacity-60",
+        isCurrent && "ring-4 ring-red-500 ring-offset-2 scale-105"
       )}
       style={{
         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.06)',
       }}
     >
       {/* Title */}
-      <p className="text-[10px] md:text-xs font-bold text-gray-800 leading-tight break-words mb-1">
+      <p className={cn(
+        "text-[10px] md:text-xs font-bold leading-tight break-words",
+        isPast ? "text-gray-600" : "text-gray-800"
+      )}>
         {session.title}
       </p>
       
-      {/* Session details */}
-      <div className="mt-auto space-y-0.5">
-        {/* Time */}
-        <div className="flex items-center gap-1">
-          <Clock className="h-2.5 w-2.5 text-gray-600" />
-          <p className="text-[8px] md:text-[10px] text-gray-600">
-            {session.time}
-          </p>
-        </div>
-        
-        {/* Room */}
-        <div className="flex items-center gap-1">
-          <MapPin className="h-2.5 w-2.5 text-gray-600" />
-          <p className="text-[8px] md:text-[10px] text-gray-600 truncate">
-            {session.room}
-          </p>
-        </div>
-        
-        {/* Duration if available */}
-        {session.duration && (
-          <p className="text-[8px] md:text-[10px] text-gray-600">
-            {session.duration} min
-          </p>
-        )}
+      {/* Room - now the only detail shown */}
+      <div className="mt-auto">
+        <p className={cn(
+          "text-[8px] md:text-[10px] truncate",
+          isPast ? "text-gray-500" : "text-gray-600"
+        )}>
+          {session.room}
+        </p>
       </div>
     </div>
   )

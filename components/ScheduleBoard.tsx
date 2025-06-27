@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Clock } from 'lucide-react'
 import Session from './Session'
 import SessionModal from './SessionModal'
@@ -9,11 +9,21 @@ import scheduleData from '@/data/sessions.json'
 
 const ScheduleBoard = () => {
   const [selectedSession, setSelectedSession] = useState<SessionData | null>(null)
+  const [currentTime, setCurrentTime] = useState(new Date())
   
   // Import data from JSON
   const rooms = scheduleData.rooms as RoomData[]
   const sessions = scheduleData.sessions as SessionData[]
   const timeSlots = scheduleData.timeSlots
+
+  // Update current time every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000) // Update every minute
+
+    return () => clearInterval(timer)
+  }, [])
 
   // Helper function to get sessions for a specific time and room
   const getSessionsForSlot = (time: string, room: string) => {
@@ -23,8 +33,32 @@ const ScheduleBoard = () => {
     return sessions.filter(s => s.time === time && s.room === room)
   }
 
+  // Check if a session is past, current, or future
+  const getSessionStatus = (time: string) => {
+    const currentHour = currentTime.getHours()
+    const currentMinutes = currentTime.getMinutes()
+    const sessionHour = parseInt(time.split(':')[0])
+    
+    // Session is past if its end time has passed (sessions are 1 hour long)
+    if (sessionHour + 1 < currentHour || (sessionHour + 1 === currentHour && currentMinutes > 0)) {
+      return 'past'
+    }
+    
+    // Session is current if we're within its hour
+    if (sessionHour === currentHour) {
+      return 'current'
+    }
+    
+    return 'future'
+  }
+
   return (
     <div className="space-y-6">
+      {/* Current Time Display */}
+      <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+        Current time: {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
+      </div>
+
       {/* Schedule Grid */}
       <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-4 md:p-6 rounded-lg shadow-2xl">
         {/* Board texture overlay */}
@@ -70,52 +104,73 @@ const ScheduleBoard = () => {
 
             {/* Time slots and sessions */}
             <div className="space-y-2">
-              {timeSlots.map((time) => (
-                <div 
-                  key={time} 
-                  className="grid gap-2 px-2 md:px-4"
-                  style={{ gridTemplateColumns: `100px repeat(${rooms.length}, 1fr)` }}
-                >
-                  {/* Time column - sticky on mobile */}
-                  <div className="sticky-time bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center h-24 p-2 rounded-lg shadow-md">
-                    <span className="text-lg md:text-xl font-bold text-gray-700 dark:text-gray-300 font-mono">
-                      {time}
-                    </span>
-                  </div>
-                  
-                  {/* Sessions for each room at this time */}
-                  {rooms.map((room) => {
-                    const sessionsInSlot = getSessionsForSlot(time, room.name)
+              {timeSlots.map((time) => {
+                const sessionStatus = getSessionStatus(time)
+                const isLunchTime = time === '13:00'
+                
+                return (
+                  <div 
+                    key={time} 
+                    className="grid gap-2 px-2 md:px-4"
+                    style={{ gridTemplateColumns: `100px repeat(${rooms.length}, 1fr)` }}
+                  >
+                    {/* Time column - sticky on mobile */}
+                    <div className={`sticky-time bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center ${isLunchTime ? 'h-16' : 'h-24'} p-2 rounded-lg shadow-md`}>
+                      <span className={`text-lg md:text-xl font-bold font-mono ${
+                        sessionStatus === 'past' ? 'text-gray-500 dark:text-gray-500' :
+                        sessionStatus === 'current' ? 'text-red-600 dark:text-red-400' :
+                        'text-gray-700 dark:text-gray-300'
+                      }`}>
+                        {time}
+                      </span>
+                    </div>
                     
-                    if (time === '13:00') {
-                      // Lunch row
+                    {/* Sessions for each room at this time */}
+                    {rooms.map((room) => {
+                      const sessionsInSlot = getSessionsForSlot(time, room.name)
+                      
+                      if (isLunchTime) {
+                        // Lunch row - now shorter height
+                        return (
+                          <div 
+                            key={`${time}-${room.name}`} 
+                            className={`flex items-center justify-center h-16 rounded-lg ${
+                              sessionStatus === 'past' 
+                                ? 'bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 border-gray-400 dark:border-gray-600' 
+                                : 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-900 border-green-300 dark:border-green-700'
+                            } border-2 border-dashed shadow-inner`}
+                          >
+                            <span className={`text-sm md:text-base font-bold tracking-wider ${
+                              sessionStatus === 'past' 
+                                ? 'text-gray-600 dark:text-gray-400' 
+                                : 'text-green-700 dark:text-green-300'
+                            }`}>
+                              LUNCH
+                            </span>
+                          </div>
+                        )
+                      }
+                      
                       return (
                         <div 
                           key={`${time}-${room.name}`} 
-                          className="flex items-center justify-center h-24 rounded-lg bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-900 border-2 border-dashed border-green-300 dark:border-green-700 shadow-inner"
+                          className="relative h-24 bg-white/10 dark:bg-gray-700/10 rounded-lg"
                         >
-                          <span className="text-sm md:text-base font-bold text-green-700 dark:text-green-300 tracking-wider">LUNCH</span>
+                          {sessionsInSlot.map((session) => (
+                            <Session 
+                              key={session.id} 
+                              session={session} 
+                              onClick={() => setSelectedSession(session)}
+                              isPast={sessionStatus === 'past'}
+                              isCurrent={sessionStatus === 'current'}
+                            />
+                          ))}
                         </div>
                       )
-                    }
-                    
-                    return (
-                      <div 
-                        key={`${time}-${room.name}`} 
-                        className="relative h-24 bg-white/10 dark:bg-gray-700/10 rounded-lg"
-                      >
-                        {sessionsInSlot.map((session) => (
-                          <Session 
-                            key={session.id} 
-                            session={session} 
-                            onClick={() => setSelectedSession(session)}
-                          />
-                        ))}
-                      </div>
-                    )
-                  })}
-                </div>
-              ))}
+                    })}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -125,7 +180,7 @@ const ScheduleBoard = () => {
       <div className="text-center text-sm text-muted-foreground space-y-2">
         <p>Click on any session for more details</p>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Each sticky note shows: Title • Time • Room
+          Each sticky note shows: Title • Room | Past sessions are grayed out
         </p>
       </div>
       
