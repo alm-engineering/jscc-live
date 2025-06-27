@@ -122,8 +122,11 @@ const ScheduleBoard = () => {
       </div>
 
       {/* Footer */}
-      <div className="text-center text-sm text-muted-foreground">
+      <div className="text-center text-sm text-muted-foreground space-y-2">
         <p>Click on any session for more details</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          Each sticky note shows: Title • Time • Room
+        </p>
       </div>
       
       {/* Session Modal */}
