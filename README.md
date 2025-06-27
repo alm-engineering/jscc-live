@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JSCC Live Schedule Board
 
-## Getting Started
+A modern, minimal conference schedule board built with Next.js, TypeScript, and shadcn/ui.
 
-First, run the development server:
+## 🎯 Features
+
+- **Modern Design**: Clean, minimal interface using shadcn/ui components
+- **Interactive Schedule**: Click on any session for detailed information
+- **Color-Coded Sessions**: 
+  - 🟡 JavaScript sessions
+  - 🔵 Workshops
+  - 🩷 Special events
+  - 🟠 Tools & Tech talks
+- **Responsive Layout**: Horizontal scrolling for smaller screens
+- **Dark Mode Support**: Automatic theme switching based on system preferences
+
+## 🚀 Tech Stack
+
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS v4** for styling
+- **shadcn/ui** for modern UI components
+- **Lucide Icons** for minimal iconography
+
+## 📦 Installation
+
+```bash
+npm install
+```
+
+## 🔧 Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── app/
+│   ├── page.tsx           # Home page
+│   ├── layout.tsx         # Root layout
+│   └── globals.css        # Global styles
+├── components/
+│   ├── ScheduleBoard.tsx  # Main schedule grid
+│   ├── Session.tsx        # Individual session card
+│   ├── SessionModal.tsx   # Session detail modal
+│   └── ui/               # shadcn/ui components
+├── types/
+│   └── schedule.ts       # TypeScript types
+└── lib/
+    └── utils.ts          # Utility functions
+```
 
-## Learn More
+## 🎨 Design Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Gradient backgrounds** for visual depth
+- **Subtle animations** on hover and click
+- **Modern typography** with clear hierarchy
+- **Accessible color contrast** ratios
+- **Smooth transitions** for better UX
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📱 Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Browse the schedule by scrolling horizontally
+2. Click on any session to view details
+3. Sessions are organized by time (rows) and room (columns)
+4. Color coding helps identify session types at a glance
 
-## Deploy on Vercel
+## 🔮 Future Enhancements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Search and filter functionality
+- Export to calendar
+- Speaker profiles
+- Real-time updates
+- Session ratings and feedback
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+MIT

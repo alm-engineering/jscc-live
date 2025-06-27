@@ -5,5 +5,6 @@ export type SessionData = {
   time: string
   duration?: number
   color?: string
+  type?: 'js' | 'workshop' | 'special' | 'tools'
   isLunch?: boolean
 } 

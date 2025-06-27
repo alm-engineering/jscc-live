@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { SessionData } from '@/types/schedule'
+import { cn } from '@/lib/utils'
 
 type SessionProps = {
   session: SessionData
@@ -13,50 +14,33 @@ const Session: React.FC<SessionProps> = ({ session, onClick }) => {
     return null // Lunch is handled differently in the grid
   }
 
-  // Simulate sticky note appearance with rotation
-  const rotations = ['-rotate-1', 'rotate-1', '-rotate-2', 'rotate-2', '-rotate-3', 'rotate-3']
-  const randomRotation = rotations[parseInt(session.id) % rotations.length] || ''
+  const getSessionClass = (type?: string) => {
+    switch (type) {
+      case 'js':
+        return 'session-js'
+      case 'workshop':
+        return 'session-workshop'
+      case 'special':
+        return 'session-special'
+      case 'tools':
+        return 'session-tools'
+      default:
+        return 'session-js'
+    }
+  }
 
   return (
     <div
       onClick={onClick}
-      className={`
-        ${session.color || 'bg-yellow-200'} 
-        p-2
-        m-1
-        rounded-sm
-        shadow-lg 
-        hover:shadow-xl 
-        transition-all
-        duration-200
-        transform 
-        ${randomRotation} 
-        hover:rotate-0
-        hover:scale-105
-        cursor-pointer
-        relative
-        h-full
-        min-h-[70px]
-        text-xs
-        font-medium
-        text-gray-800
-        border-l-4 border-b-4 border-gray-400/20
-        before:content-['']
-        before:absolute
-        before:top-0
-        before:right-0
-        before:w-0
-        before:h-0
-        before:border-t-[10px]
-        before:border-t-gray-50
-        before:border-r-[10px]
-        before:border-r-transparent
-      `}
-      style={{
-        boxShadow: '2px 2px 6px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05)'
-      }}
+      className={cn(
+        "absolute inset-0 p-1 md:p-2 rounded-lg transition-all duration-200 cursor-pointer",
+        "hover:scale-[1.02] hover:shadow-md hover:-translate-y-0.5",
+        "flex items-center justify-center text-center",
+        "border border-transparent hover:border-border/50",
+        getSessionClass(session.type)
+      )}
     >
-      <p className="leading-tight break-words text-[11px] font-semibold">
+      <p className="text-[10px] md:text-xs font-medium leading-tight break-words px-1">
         {session.title}
       </p>
     </div>
