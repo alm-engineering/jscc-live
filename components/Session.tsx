@@ -3,6 +3,7 @@
 import React from 'react'
 import { SessionData } from '@/types/schedule'
 import { cn } from '@/lib/utils'
+import { Clock, MapPin } from 'lucide-react'
 
 type SessionProps = {
   session: SessionData
@@ -33,10 +34,10 @@ const Session: React.FC<SessionProps> = ({ session, onClick }) => {
     <div
       onClick={onClick}
       className={cn(
-        "absolute inset-1 p-2 md:p-3 cursor-pointer",
+        "absolute inset-1 p-2 cursor-pointer",
         "transition-all duration-200",
         "hover:scale-105 hover:-translate-y-1",
-        "flex flex-col justify-between",
+        "flex flex-col",
         randomColor,
         randomRotation,
         "shadow-lg hover:shadow-xl",
@@ -53,18 +54,36 @@ const Session: React.FC<SessionProps> = ({ session, onClick }) => {
         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.06)',
       }}
     >
-      <p className="text-[11px] md:text-sm font-medium text-gray-800 leading-tight break-words flex-1">
+      {/* Title */}
+      <p className="text-[10px] md:text-xs font-bold text-gray-800 leading-tight break-words mb-1">
         {session.title}
       </p>
       
-      {/* Display speaker name if available */}
-      {session.speaker && (
-        <div className="mt-2 pt-1 border-t border-gray-300/30">
-          <p className="text-[9px] md:text-xs text-gray-600">
-            {session.speaker}
+      {/* Session details */}
+      <div className="mt-auto space-y-0.5">
+        {/* Time */}
+        <div className="flex items-center gap-1">
+          <Clock className="h-2.5 w-2.5 text-gray-600" />
+          <p className="text-[8px] md:text-[10px] text-gray-600">
+            {session.time}
           </p>
         </div>
-      )}
+        
+        {/* Room */}
+        <div className="flex items-center gap-1">
+          <MapPin className="h-2.5 w-2.5 text-gray-600" />
+          <p className="text-[8px] md:text-[10px] text-gray-600 truncate">
+            {session.room}
+          </p>
+        </div>
+        
+        {/* Duration if available */}
+        {session.duration && (
+          <p className="text-[8px] md:text-[10px] text-gray-600">
+            {session.duration} min
+          </p>
+        )}
+      </div>
     </div>
   )
 }

@@ -46,16 +46,19 @@ const ScheduleBoard = () => {
         </div>
         
         <div className="relative overflow-x-auto -mx-4 md:mx-0">
-          <div className="min-w-[1200px]">
+          <div className="min-w-[1600px]">
             {/* Header */}
-            <div className="grid grid-cols-[100px_repeat(8,1fr)] gap-2 mb-6 px-2 md:px-4">
+            <div 
+              className="grid gap-2 mb-6 px-2 md:px-4" 
+              style={{ gridTemplateColumns: `100px repeat(${rooms.length}, 1fr)` }}
+            >
               <div className="sticky-time bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center p-2 rounded-lg shadow-md">
                 <Clock className="h-5 w-5 text-gray-600 dark:text-gray-400" />
               </div>
               {rooms.map((room) => (
                 <div key={room.name} className="text-center space-y-1 p-3 bg-white/50 dark:bg-gray-700/50 rounded-lg shadow-sm backdrop-blur-sm">
                   <div className="text-xl">{room.icon}</div>
-                  <div className="font-semibold text-xs md:text-sm text-gray-700 dark:text-gray-300">{room.name}</div>
+                  <div className="font-semibold text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{room.name}</div>
                   {room.subtitle && (
                     <div className="text-xs text-gray-500 dark:text-gray-400">{room.subtitle}</div>
                   )}
@@ -68,7 +71,11 @@ const ScheduleBoard = () => {
             {/* Time slots and sessions */}
             <div className="space-y-2">
               {timeSlots.map((time) => (
-                <div key={time} className="grid grid-cols-[100px_repeat(8,1fr)] gap-2 px-2 md:px-4">
+                <div 
+                  key={time} 
+                  className="grid gap-2 px-2 md:px-4"
+                  style={{ gridTemplateColumns: `100px repeat(${rooms.length}, 1fr)` }}
+                >
                   {/* Time column - sticky on mobile */}
                   <div className="sticky-time bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center h-24 p-2 rounded-lg shadow-md">
                     <span className="text-lg md:text-xl font-bold text-gray-700 dark:text-gray-300 font-mono">
