@@ -1,0 +1,283 @@
+{
+  "sessions": [
+    {
+      "id": "1",
+      "title": "Building AI-Rules Mob/Ensemble",
+      "time": "11:00",
+      "room": "codecentric",
+      "speaker": "Marco"
+    },
+    {
+      "id": "2",
+      "title": "Coolify Deployment",
+      "time": "11:00",
+      "room": "inovex",
+      "speaker": "Jacob"
+    },
+    {
+      "id": "3",
+      "title": "Frameworks vs Vanilla CRA SBOM",
+      "time": "11:00",
+      "room": "SAAB",
+      "speaker": "cyber..."
+    },
+    {
+      "id": "4",
+      "title": "History of Software Dev 'Software Crisis'",
+      "time": "11:00",
+      "room": "composeus"
+    },
+    {
+      "id": "5",
+      "title": "Parametrix.fr CAD",
+      "time": "11:00",
+      "room": "inspired",
+      "speaker": "Charles"
+    },
+    {
+      "id": "6",
+      "title": "CSS BATTLE",
+      "time": "11:00",
+      "room": "twilio",
+      "speaker": "Jan"
+    },
+    {
+      "id": "7",
+      "title": "You don't need JS for that",
+      "time": "11:00",
+      "room": "peer",
+      "speaker": "Bernd"
+    },
+    {
+      "id": "8",
+      "title": "Keep your project clean with Knip",
+      "time": "12:00",
+      "room": "codecentric",
+      "speaker": "Tbert"
+    },
+    {
+      "id": "9",
+      "title": "Five Rules of ARIA",
+      "time": "12:00",
+      "room": "inovex",
+      "speaker": "Lallos"
+    },
+    {
+      "id": "10",
+      "title": "A grade to new Design System FOR ACCESSIBILITY",
+      "time": "12:00",
+      "room": "SAAB",
+      "speaker": "Robert"
+    },
+    {
+      "id": "11",
+      "title": "NextJS Learnings & Hosting",
+      "time": "12:00",
+      "room": "composeus",
+      "speaker": "Maxo, Koshi"
+    },
+    {
+      "id": "12",
+      "title": "Tauri (like Electron, but with Rust!)",
+      "time": "12:00",
+      "room": "inspired",
+      "speaker": "Matthias St."
+    },
+    {
+      "id": "13",
+      "title": "DENO DEPLOY EA",
+      "time": "12:00",
+      "room": "twilio",
+      "speaker": "Leo"
+    },
+    {
+      "id": "14",
+      "title": "Side Project about your Project",
+      "time": "12:00",
+      "room": "peer",
+      "speaker": "Matt"
+    },
+    {
+      "id": "lunch",
+      "title": "LUNCH",
+      "time": "13:00",
+      "room": "all",
+      "isLunch": true
+    },
+    {
+      "id": "15",
+      "title": "JavaScript™ Standards",
+      "time": "14:00",
+      "room": "codecentric",
+      "speaker": "Leo"
+    },
+    {
+      "id": "16",
+      "title": "State of State management (discussion)",
+      "time": "14:00",
+      "room": "inovex",
+      "speaker": "Matthias St."
+    },
+    {
+      "id": "17",
+      "title": "Security AMA",
+      "time": "14:00",
+      "room": "SAAB"
+    },
+    {
+      "id": "18",
+      "title": "Fun w/ Open Realtime API",
+      "time": "14:00",
+      "room": "composeus",
+      "speaker": "Malis"
+    },
+    {
+      "id": "19",
+      "title": "'Social Media Exports Tool'",
+      "time": "14:00",
+      "room": "inspired",
+      "speaker": "Philipp"
+    },
+    {
+      "id": "20",
+      "title": "Thinking about Performance",
+      "time": "14:00",
+      "room": "twilio",
+      "speaker": "Peter"
+    },
+    {
+      "id": "21",
+      "title": "Javascript Session (live)",
+      "time": "15:00",
+      "room": "index"
+    },
+    {
+      "id": "22",
+      "title": "ToolMo Beruf",
+      "time": "15:00",
+      "room": "SAAS"
+    },
+    {
+      "id": "23",
+      "title": "Building low code in React",
+      "time": "15:00",
+      "room": "components"
+    },
+    {
+      "id": "24",
+      "title": "Git things",
+      "time": "15:00",
+      "room": "twilio"
+    },
+    {
+      "id": "25",
+      "title": "Screen Setlist streams",
+      "time": "15:00",
+      "room": "peermion"
+    },
+    {
+      "id": "26",
+      "title": "FOOTY Mapping",
+      "time": "15:00",
+      "room": "Tiffinger Thiel"
+    },
+    {
+      "id": "27",
+      "title": "Frontend Universe",
+      "time": "16:00",
+      "room": "index"
+    },
+    {
+      "id": "28",
+      "title": "My JS Story & FOOTY",
+      "time": "16:00",
+      "room": "SAAS"
+    },
+    {
+      "id": "29",
+      "title": "Lightning TALKS",
+      "time": "16:00",
+      "room": "components"
+    },
+    {
+      "id": "30",
+      "title": "Refresh JS Mobile stage",
+      "time": "16:00",
+      "room": "peermion"
+    },
+    {
+      "id": "31",
+      "title": "Evening News",
+      "time": "17:00",
+      "room": "index"
+    },
+    {
+      "id": "32",
+      "title": "Effects",
+      "time": "17:00",
+      "room": "twilio"
+    },
+    {
+      "id": "33",
+      "title": "Code panel JS minimal code demos",
+      "time": "17:00",
+      "room": "Holzner Alm"
+    },
+    {
+      "id": "34",
+      "title": "Build an ESG Report",
+      "time": "17:00",
+      "room": "Some place else"
+    }
+  ],
+  "rooms": [
+    {
+      "name": "codecentric",
+      "icon": "💻",
+      "subtitle": "1st floor, 50p"
+    },
+    {
+      "name": "inovex",
+      "icon": "🚀",
+      "subtitle": "1st floor, TV, 12p"
+    },
+    {
+      "name": "SAAB",
+      "icon": "✈️",
+      "subtitle": "10p"
+    },
+    {
+      "name": "composeus",
+      "icon": "🧩",
+      "subtitle": "20p"
+    },
+    {
+      "name": "inspired",
+      "icon": "💡",
+      "subtitle": "finanzvergleich demo, 10p"
+    },
+    {
+      "name": "twilio",
+      "icon": "📱",
+      "subtitle": "TV, 10p"
+    },
+    {
+      "name": "peer",
+      "icon": "🔗",
+      "subtitle": ""
+    },
+    {
+      "name": "Some place else",
+      "icon": "📍"
+    }
+  ],
+  "timeSlots": [
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00"
+  ]
+} 

@@ -3,8 +3,13 @@ export type SessionData = {
   title: string
   room: string
   time: string
+  speaker?: string
   duration?: number
-  color?: string
-  type?: 'js' | 'workshop' | 'special' | 'tools'
   isLunch?: boolean
+}
+
+export type RoomData = {
+  name: string
+  icon: string
+  subtitle?: string
 } 

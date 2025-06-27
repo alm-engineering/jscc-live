@@ -9,8 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { Badge } from '@/components/ui/badge'
-import { Clock, MapPin, Calendar } from 'lucide-react'
+import { Clock, MapPin, X } from 'lucide-react'
 
 type SessionModalProps = {
   session: SessionData
@@ -18,76 +17,64 @@ type SessionModalProps = {
 }
 
 const SessionModal: React.FC<SessionModalProps> = ({ session, onClose }) => {
-  const getSessionTypeLabel = (type?: string) => {
-    switch (type) {
-      case 'js':
-        return 'JavaScript'
-      case 'workshop':
-        return 'Workshop'
-      case 'special':
-        return 'Special Event'
-      case 'tools':
-        return 'Tools & Tech'
-      default:
-        return 'Session'
-    }
-  }
-
-  const getSessionClass = (type?: string) => {
-    switch (type) {
-      case 'js':
-        return 'session-js'
-      case 'workshop':
-        return 'session-workshop'
-      case 'special':
-        return 'session-special'
-      case 'tools':
-        return 'session-tools'
-      default:
-        return 'session-js'
-    }
-  }
-
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">{session.title}</DialogTitle>
+      <DialogContent className="max-w-md bg-yellow-100 border-0 shadow-2xl rotate-1">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 p-1 rounded-full hover:bg-yellow-200 transition-colors"
+          aria-label="Close dialog"
+        >
+          <X className="h-4 w-4 text-gray-600" />
+        </button>
+        
+        <div 
+          className="absolute top-0 right-0 w-0 h-0"
+          style={{
+            borderTop: '30px solid rgba(255,255,255,0.5)',
+            borderRight: '30px solid transparent',
+          }}
+        />
+        
+        <DialogHeader className="pb-3 border-b border-gray-300/30">
+          <DialogTitle className="text-xl font-bold text-gray-800 pr-6">{session.title}</DialogTitle>
           <DialogDescription className="sr-only">
             Session details for {session.title}
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4 pt-4">
-          <Badge className={`${getSessionClass(session.type)} border-0 w-fit`}>
-            {getSessionTypeLabel(session.type)}
-          </Badge>
-          
           <div className="space-y-3">
-            <div className="flex items-center gap-3 text-sm">
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium">Room:</span>
-              <span>{session.room}</span>
+            <div className="flex items-start gap-3">
+              <MapPin className="h-4 w-4 text-gray-600 mt-0.5" />
+              <div>
+                <span className="font-semibold text-sm text-gray-700">Room</span>
+                <p className="text-gray-800">{session.room}</p>
+              </div>
             </div>
             
-            <div className="flex items-center gap-3 text-sm">
-              <Clock className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium">Time:</span>
-              <span>{session.time}</span>
+            <div className="flex items-start gap-3">
+              <Clock className="h-4 w-4 text-gray-600 mt-0.5" />
+              <div>
+                <span className="font-semibold text-sm text-gray-700">Time</span>
+                <p className="text-gray-800">{session.time}</p>
+              </div>
             </div>
             
-            {session.duration && (
-              <div className="flex items-center gap-3 text-sm">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span className="font-medium">Duration:</span>
-                <span>{session.duration} hour{session.duration > 1 ? 's' : ''}</span>
+            {session.speaker && (
+              <div className="flex items-start gap-3">
+                <span className="text-gray-600 mt-0.5">👤</span>
+                <div>
+                  <span className="font-semibold text-sm text-gray-700">Speaker</span>
+                  <p className="text-gray-800">{session.speaker}</p>
+                </div>
               </div>
             )}
           </div>
           
-          <div className="pt-4 border-t">
-            <p className="text-sm text-muted-foreground">
-              Join us for this exciting session at JSCC Live!
+          <div className="pt-4 border-t border-gray-300/30">
+            <p className="text-sm text-gray-600 italic">
+              Don&apos;t forget to bring your laptop!
             </p>
           </div>
         </div>
