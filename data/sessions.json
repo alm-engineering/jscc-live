@@ -25,7 +25,7 @@
     { "id": "19", "title": "WASM 101", "time": "14:00", "room": "inovex" },
     { "id": "20", "title": "#jslang JavaScript the language", "time": "14:00", "room": "twilio" },
     { "id": "21", "title": "AMA Hexagonal Architecture", "time": "14:00", "room": "In-Fi-De-Go" },
-    { "id": "22", "title": "Navigating the Maze", "time": "14:00", "room": "codecentric" },
+    { "id": "22", "title": "Navigating the Security-Maze", "time": "14:00", "room": "codecentric" },
     { "id": "23", "title": "AsyncLocalStorage", "time": "14:00", "room": "peerigon" },
     { "id": "24", "title": "Child-age coding experiences", "time": "14:00", "room": "SAAB" },
 
