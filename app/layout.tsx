@@ -33,9 +33,9 @@ export default function RootLayout({
         <div className="fixed font-bold top-1/2 left-1/2 -translate-x-1/2 translate-y-[170px] text-[18px] z-50 text-center whitespace-nowrap">
           I am on it, updating the schedule board.
         </div>
-        {/* <Providers>
+        <Providers>
           {children}
-        </Providers> */}
+        </Providers>
       </body>
     </html>
   );
